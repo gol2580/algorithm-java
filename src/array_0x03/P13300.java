@@ -3,6 +3,7 @@ package array_0x03;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 public class P13300 {
     public static void main(String[] args) throws IOException {
@@ -23,5 +24,7 @@ public class P13300 {
             rooms+=(int)Math.ceil((double)students[i]/(double)k);
         }
         System.out.println(rooms);
+
+
     }
 }

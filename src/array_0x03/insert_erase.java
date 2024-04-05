@@ -1,4 +1,7 @@
 package array_0x03;
+
+import java.util.Vector;
+
 /*
 void insert(int idx, int num, int arr[], int& len){
 
@@ -51,7 +54,6 @@ public class insert_erase {
         return ++len;
     }
     public static int erase(int idx, int[] arr, int len) {
-        //idx=1
         for(int i=idx+1;i<len;i++) {
             arr[i-1] = arr[i];
         }
@@ -90,4 +92,5 @@ public class insert_erase {
         insert_test();
         erase_test();
     }
+
 }
