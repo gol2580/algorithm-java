@@ -12,7 +12,7 @@ public class P5957 {
         int n = Integer.parseInt(br.readLine());
 
         Stack<Integer> stack = new Stack<>();
-        for(int i=5;i>=1;i--) {stack.push(i);}
+        for(int i=n;i>=1;i--) {stack.push(i);}
 
         Stack<Integer> dStack = new Stack<>();
         Stack<Integer> cStack = new Stack<>();
