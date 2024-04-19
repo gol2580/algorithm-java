@@ -12,10 +12,8 @@ public class P5957 {
         int n = Integer.parseInt(br.readLine());
 
         Stack<Integer> stack = new Stack<>();
-        while(n>=1) {stack.push(n--);}
-        for(Integer i : stack) {
-            System.out.println(i);
-        }
+        for(int i=5;i>=1;i--) {stack.push(i);}
+
         Stack<Integer> dStack = new Stack<>();
         Stack<Integer> cStack = new Stack<>();
         while (true) {
@@ -25,7 +23,6 @@ public class P5957 {
                 for(int j=0;j<d;j++) {
                     if(!stack.isEmpty()) {
                         dStack.push(stack.pop());
-                        System.out.println(dStack.peek());
                     }
                 }
             } else {
@@ -33,14 +30,13 @@ public class P5957 {
                 for(int j=0;j<d;j++) {
                     if(!dStack.isEmpty()) {
                         cStack.push(dStack.pop());
-                        System.out.println(cStack.peek());
                     }
                 }
             }
             if(cStack.size()==n) {break;}
         }
-        for(Integer i : cStack) {
-            System.out.println(i);
+        while(!cStack.isEmpty()) {
+            System.out.println(cStack.pop());
         }
     }
 }
