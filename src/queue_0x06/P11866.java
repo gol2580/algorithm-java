@@ -18,7 +18,7 @@ public class P11866 {
         while(true) {
             if(q.isEmpty()) {sb.append(">"); break;}
             for(int i=1;;i++) {
-                if(i%3==0) { sb.append(q.poll()); break;}
+                if(i%k==0) { sb.append(q.poll()); break;}
                 else { q.offer(q.poll()); }
             }
             if(!q.isEmpty()) {sb.append(", ");}
