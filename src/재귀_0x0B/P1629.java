@@ -8,22 +8,22 @@ import java.util.StringTokenizer;
 
 public class P1629 {
     // a^b % c
-    static Long a,b,c;
-    static Long result;
+    static BigInteger a,b,c;
+    static BigInteger result;
 
-    static Long get(Long A, Long B, Long C) {
-        if(b==1) return A%C;
-        result  = get(A,B/2,C);
-        result = result*result%C;
-        if(b%2==0) return result;
-        return result*A%C;
+    static BigInteger get(BigInteger A, BigInteger B, BigInteger C) {
+        if(B.equals(BigInteger.ONE)) return A.mod(C);
+        result  = get(A,B.divide(BigInteger.TEN),C);
+        result = result.multiply(result).mod(C);
+        if(b.mod(BigInteger.TEN).equals(BigInteger.ZERO)) return result;
+        return result.multiply(A).mod(C);
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine()," ");
-        a = Long.valueOf(Integer.parseInt(st.nextToken()));
-        b = Long.valueOf(Integer.parseInt(st.nextToken()));
-        c = Long.valueOf(Integer.parseInt(st.nextToken()));
+        a = BigInteger.valueOf(Integer.parseInt(st.nextToken()));
+        b = BigInteger.valueOf(Integer.parseInt(st.nextToken()));
+        c = BigInteger.valueOf(Integer.parseInt(st.nextToken()));
         get(a,b,c);
         System.out.println(result);
     }
