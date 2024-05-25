@@ -6,27 +6,28 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class P1074 {
-    static int N, r, c;
+    static int n, r, c;
     static int result = 0;
     static int i=0;
-    static void visit(int R, int C) {
-        result++; i++;
-        if(R==r && C==c) return;
-        if((i%4)==1) visit(R,C+1);
-        if((i%4)==2) visit(R-1, C-1);
-        if((i%4)==3) visit(R,C+1);
-        if((i%4)==0) {
-
-        }
-
+    static int visit(int N, int R, int C) {
+        if(N==0) return 0;
+        //절반 : (2^n)/2 = 2^(n-1)
+        int half = 1<<(N-1);
+        // 1사각형
+        if(R<half && C<half) {return visit(N-1,R,C);}
+        // 2사각형
+        if(R<half && C>=half) {return half*half + visit(N-1,R,C-half);}
+        // 3사각형
+        if(R>=half && C<half) {return half*half*2 + visit(N-1,R-half,C);}
+        // 4사각형
+        return half*half*3 + visit(N-1,R-half,C-half);
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine()," ");
-        N = Integer.parseInt(st.nextToken());
+        n = Integer.parseInt(st.nextToken());
         r = Integer.parseInt(st.nextToken());
         c = Integer.parseInt(st.nextToken());
-        visit(0,0);
-        System.out.println(result);
+        System.out.println(visit(n,r,c));
     }
 }
