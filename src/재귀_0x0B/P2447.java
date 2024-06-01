@@ -16,41 +16,15 @@ public class P2447 {
     static StringBuilder sb = new StringBuilder();
     static char[][] board;
     static int m;
-    static void printPattern(int x, int y, int n) {
-        for (int i = 0; i < 3*n; i+=n) {
-            for (int j = 0; j < 3*n; j+=n) {
-                if(i==n && j==n)  { board[x+i][y+j]=' '; continue; }
-                board[x+i][y+j]='*';
-            }
+    static void printStar(int x, int y, int n) {
+        if(n==1) {
+            board[x][y]='*';
+            return;
         }
-    }
-    static void printBlank(int x, int y, int n) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                board[x+i][y+j]=' ';
-            }
-        }
-    }
-
-    static void printStar(int n) {
-        if(n/3==0) return;
-        printStar(n/3);
-        for (int i = 0; i < 3*n ; i+=n) {
-            for (int j = 0; j < 3*n; j+=n) {
-                if(i==n && j==n)  {
-                    printBlank(i,j,n);
-                    continue;
-                }
-                if(i==m || j==m) return;
-                printPattern(i,j,n/3);
-                /*
-                for (int k = 0; k < n; k+=n/3) {
-                    for (int l = 0; l < n; l+=n/3) {
-                        if(k==n/3 && l==n/3)  { board[i+k][j+l]=' '; continue; }
-                        board[i+k][j+l]='*';
-                    }
-                }
-                 */
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(i==1 && j==1) continue;
+                printStar(x+n/3*i, y+n/3*j, n/3);
             }
         }
 
@@ -59,7 +33,12 @@ public class P2447 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         m = Integer.parseInt(br.readLine());
         board = new char[m][m];
-        printStar(m);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m; j++) {
+                board[i][j]=' ';
+            }
+        }
+        printStar(0,0, m);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < m; j++) {
                 sb.append(board[i][j]);
