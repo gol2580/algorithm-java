@@ -3,7 +3,6 @@ package 재귀_0x0B;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 public class P1629 {
@@ -12,12 +11,13 @@ public class P1629 {
     static long result;
 
     static long get(long A, long B, long C) {
-        if(b==0) return A%C;
+        if(B==1) return A%C;
 
-        result = get(A,B/2,C);
-        result = result*result%C;
+        result = get(A, B/2, C);
+        result = result * result % C;
 
-       return result;
+        if(B%2==0) return result;
+        return result*A%C;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,7 +25,6 @@ public class P1629 {
         a = Long.parseLong(st.nextToken());
         b = Long.parseLong(st.nextToken());
         c = Long.parseLong(st.nextToken());
-        get(a,b,c);
-        System.out.println(result);
+        System.out.println(get(a,b,c));
     }
 }
