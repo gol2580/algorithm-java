@@ -11,22 +11,22 @@ public class P2579 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int[] s = new int[305]; int[][] d = new int[305][3];
-        for (int i = 0; i < n; i++) s[i] = Integer.parseInt(br.readLine());
+        int[] s = new int[305]; int[] d = new int[305];
+        int total = 0;
+        for (int i = 0; i < n; i++) {
+            s[i] = Integer.parseInt(br.readLine());
+            total+=s[i];
+        }
         // d[k][1] = Math.max(d[k-2][1], d[k-2][2]) + s[k]
         // d[k][2] = d[k-1][1] + s[k]
-        if(n==1) {
-            System.out.println(s[1]);
+        if(n<=2) {
+            System.out.println(total);
             return;
         }
-        d[1][1]= s[1];
-        d[1][2] = 0;
-        d[2][1] = s[2];
-        d[2][2] = s[1]+s[2];
-        for (int i = 3; i <= n ; i++) {
-            d[i][1] = Math.max(d[i-2][1], d[i-2][2]+s[i]);
-            d[i][2] = d[i-1][1]+s[i];
-        }
-        System.out.println(Math.max(d[n][1], d[n][2]));
+        d[1]= s[1];
+        d[2] = s[2];
+        d[3]= s[3];
+        for (int i = 4; i <= n-1 ; i++) d[i] = Math.min(d[i-2],d[i-3])+s[i];
+        System.out.println(total-Math.min(d[n-1],d[n-2]));
     }
 }
