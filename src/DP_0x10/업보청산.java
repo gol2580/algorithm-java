@@ -49,6 +49,7 @@ public class 업보청산 {
 
         System.out.println(Math.max(d[n][0], d[n][1]));
      */
+        /*
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st;
         int[] r = new int[1005];
@@ -75,5 +76,25 @@ public class 업보청산 {
             d[i][2] = Math.min(d[i-1][0], d[i-1][1]) + b[i];
         }
         System.out.println(Math.min(Math.min(d[n][0], d[n][1]), d[n][2]));
+
+         */
+        int n = Integer.parseInt(br.readLine());
+
+        // 1. 테이블 설정
+        // d[i] : 2 X i 짜리 타일을 채우는 경우의 수
+        int[] d = new int[100005];
+        int mod = 10007;
+
+        // 2. 초기값 설정
+        d[1] = 1;
+        d[2] = 2;
+
+        // 3. 점화식
+        // 3-1. 0,0에 1X2짜리 타일을 넣는 경우 = d[i-2]이 된다
+        // 3-2. 0,0에 2X1짜리 타일을 넣는 경우 = d[i-1]이 된다
+        for (int i = 3; i <= n; i++) d[i] = (d[i - 1] + d[i - 2]) % mod;
+
+        //출력
+        System.out.println(d[n]);
     }
 }
