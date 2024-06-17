@@ -3,6 +3,7 @@ package DP_0x10;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class 업보청산 {
 
@@ -25,6 +26,7 @@ public class 업보청산 {
         }
         System.out.println(d[n]);
     */
+    /*
         int n = Integer.parseInt(br.readLine());
         int[] s = new int[305];
         for (int i = 1; i <= n; i++) s[i] = Integer.parseInt(br.readLine());
@@ -46,6 +48,32 @@ public class 업보청산 {
         }
 
         System.out.println(Math.max(d[n][0], d[n][1]));
-    }
+     */
+        int n = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        int[] r = new int[1005];
+        int[] g = new int[1005];
+        int[] b = new int[1005];
+        for (int i = 1; i <= n; i++) {
+            st = new StringTokenizer(br.readLine()," ");
+            r[i] = Integer.parseInt(st.nextToken());
+            g[i] = Integer.parseInt(st.nextToken());
+            b[i] = Integer.parseInt(st.nextToken());
+        }
 
+        // 1. 테이블 설정
+        // d[i][3] : i번째 집이 각각 r / g / b일 때 합의 최솟값을 저장
+        int[][] d = new int[1005][3];
+
+        //2. 초기값 설정
+        d[1][0] = r[1]; d[1][1] = g[1]; d[1][2] = b[1];
+
+        // 3. 점화식
+        for (int i = 2; i <= n; i++) {
+            d[i][0] = Math.min(d[i-1][1], d[i-1][2]) + r[i];
+            d[i][1] = Math.min(d[i-1][0], d[i-1][2]) + g[i];
+            d[i][2] = Math.min(d[i-1][0], d[i-1][1]) + b[i];
+        }
+        System.out.println(Math.min(Math.min(d[n][0], d[n][1]), d[n][2]));
+    }
 }
