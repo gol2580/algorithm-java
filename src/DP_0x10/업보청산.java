@@ -78,6 +78,7 @@ public class 업보청산 {
         System.out.println(Math.min(Math.min(d[n][0], d[n][1]), d[n][2]));
 
          */
+        /*
         int n = Integer.parseInt(br.readLine());
 
         // 1. 테이블 설정
@@ -96,5 +97,23 @@ public class 업보청산 {
 
         //출력
         System.out.println(d[n]);
+         */
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        int n = Integer.parseInt(st.nextToken()); int m = Integer.parseInt(st.nextToken());
+
+        int[] list = new int[n+1];
+        st = new StringTokenizer(br.readLine()," ");
+
+        //list[i] : 1번째 수부터 i번째 수까지의 합
+        list[1] = Integer.parseInt(st.nextToken());
+        for (int i = 2; i <= n; i++) list[i] = list[i-1]+Integer.parseInt(st.nextToken());
+
+        //점화식
+        // i ~ j번재 수까지의 합 = ( 1~j번째까지 합 ) - ( 1~i-1번째까지의 합 )
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine()," ");
+            int a = Integer.parseInt(st.nextToken()); int b = Integer.parseInt(st.nextToken());
+            System.out.println(list[b]-list[a-1]);
+        }
     }
 }
